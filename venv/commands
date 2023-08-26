@@ -1,0 +1,24 @@
+ - > python -m venv venv
+this is to create a environvent for the project 
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+--> venv\Scripts\activate.bat
+ source is a shell command designed for users running on Linux (or any Posix, but whatever, not Windows).
+
+On Windows, virtualenv creates a .bat/.ps1 file, so you should run venv\Scripts\activate instead (per the virtualenv documentation on the activate script).
+
+Just run activate, without an extension, so the right file will get used regardless of whether you're using cmd.exe or PowerShell.
+to activate the venv in which we are going to do our project 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+ipython command line argument --> fetch('http://books.toscrape.com/')
+help us to fetch the whole html of that website and store it in a variable in the scrapy shell
+it is saved in a response variable
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+response.css("arcticle.product_pod")  this will give us all the books that are on the page
+
+------------------------------------------------------------------------------------------------------------------------
