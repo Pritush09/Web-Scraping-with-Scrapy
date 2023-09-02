@@ -53,4 +53,4 @@ class BookspiderSpider(scrapy.Spider):
             'price': book.css('p.price_color ::text').get(),
         }
 # to get a output save to file 
-# command -> scrapy crawl bookscraper -O bookdata.csv
+# command -> scrapy crawl bookspider -O bookdata.csv
