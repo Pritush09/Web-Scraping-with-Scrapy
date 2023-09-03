@@ -42,6 +42,7 @@ class BookspiderSpider(scrapy.Spider):
         # the line if we just  used yield{} to get our output
 
         book_item = BookItem()
+
         book_item['url'] = response.url
         book_item['title'] = book.css("h1 ::text").get()
         book_item['upc'] = table_rows[0].css("td ::text").get()
@@ -55,6 +56,7 @@ class BookspiderSpider(scrapy.Spider):
         book_item['category'] = book.xpath("//ul[@class='breadcrumb']/li[@class='active']/preceding-sibling::li[1]/a/text()").get()
         book_item['description'] = book.xpath("//div[@id='product_description']/following-sibling::p/text()").get()
         book_item['price'] = book.css('p.price_color ::text').get()
+        
         yield book_item
         # This gives our data more structure and allows us to more easily clean it in data pipelines.
 
