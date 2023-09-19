@@ -64,6 +64,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     "bookscraper.pipelines.BookscraperPipeline": 300,
+    "bookscraper.pipelines.SaveToMySQLPipeline": 400 # the no. denotes the order of precedence lower the no. higher the preference
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -91,3 +92,7 @@ ITEM_PIPELINES = {
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+#FEEDS = {
+ #   'data.csv': {'format': 'csv','overwrite' :True}
+#}
