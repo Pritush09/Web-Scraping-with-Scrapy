@@ -22,7 +22,12 @@ NEWSPIDER_MODULE = "bookscraper.spiders"
 
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = True 
+# this is simply for the spider to see the website 's robots.txt file where the rules are specified whether to scrape this page or not and
+#  will make your spider to stop working 
+# we should set this parameter false when we are scraping complex website which has high quality bot conttrol system
+
+
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -67,10 +72,14 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    "bookscraper.pipelines.BookscraperPipeline": 300,
-    "bookscraper.pipelines.SaveToMySQLPipeline": 400 # the no. denotes the order of precedence lower the no. higher the preference
-}
+
+
+#ITEM_PIPELINES = {
+#    "bookscraper.pipelines.BookscraperPipeline": 300,
+#    "bookscraper.pipelines.SaveToMySQLPipeline": 400 # the no. denotes the order of precedence lower the no. higher the preference
+#}
+
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -103,3 +112,11 @@ FEED_EXPORT_ENCODING = "utf-8"
 #}
 
 
+SCRAPEOPS_API_KEY = 'Your API'
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'http://headers.scrapeops.io/v1/user-agents?'
+SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
+SCRAPEOPS_NUM_RESULTS = 50
+
+DOWNLOADER_MIDDLEWARES = {
+    'bookscraper.middlewares.ScrapeOpsFakeUserAgentMiddleware': 400,
+}
