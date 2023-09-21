@@ -95,7 +95,8 @@ class SaveToMySQLPipeline:
             host = 'localhost',
             user = 'root',
             password = '',
-            database = 'books'
+            database = 'books',
+
         )
 
         ## Create cursor, used to execute commands
