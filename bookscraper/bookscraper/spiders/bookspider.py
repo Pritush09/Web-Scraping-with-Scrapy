@@ -1,6 +1,9 @@
 import scrapy
 #https://thepythonscrapyplaybook.com/freecodecamp-beginner-course/freecodecamp-scrapy-beginners-course-part-4-first-scraper/#creating-our-scrapy-spider
 from bookscraper.items import BookItem
+#import random
+
+
 
 class BookspiderSpider(scrapy.Spider):
     name = "bookspider"
@@ -10,6 +13,24 @@ class BookspiderSpider(scrapy.Spider):
     #custom_settings = {
      #   'FEEDS': { 'data.csv': { 'format': 'csv',}}
       #  }
+
+    # ----------------------------------------------------------------------------------------------------------------------------------------
+    # this will be changing user agent which will be hard for the bot detecter of website to detect if we are scraping there data
+    #This works but it has 2 drawbacks:
+
+     # * We need to manage a list of user-agents ourselves.
+     # * We would need to implement this into every spider, which isn't ideal.
+     
+     #A better approach would be to use a Scrapy middleware to manage our user-agents for us.
+    
+    #user_agent_list = [
+     #   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36',
+      #  'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1',
+       # 'Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)',
+       # 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75',
+       # 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363',
+    #]
+    
 
     def parse(self, response):
         books = response.css("article.product_pod")
@@ -22,6 +43,8 @@ class BookspiderSpider(scrapy.Spider):
             else:
                 books_url_full = "http://books.toscrape.com/catalogue/"+books_url
             yield response.follow(books_url_full , callback=self.parse_book_page)
+                                # just add this line inside the response .follow() function 
+                                  #headers={"User-Agent": self.user_agent_list[random.randint(0, len(self.user_agent_list)-1)]})
             
         
         
@@ -33,6 +56,10 @@ class BookspiderSpider(scrapy.Spider):
             else:
                 next_page_url = "http://books.toscrape.com/catalogue/"+next_page
             yield response.follow(next_page_url , callback=self.parse)
+
+
+
+
 
 
     def parse_book_page(self,response):
