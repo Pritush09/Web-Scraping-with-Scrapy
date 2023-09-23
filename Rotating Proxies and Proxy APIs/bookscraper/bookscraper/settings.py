@@ -112,11 +112,32 @@ FEED_EXPORT_ENCODING = "utf-8"
 #}
 
 
-SCRAPEOPS_API_KEY = 'Your API'
+SCRAPEOPS_API_KEY = '90680d83-0ed2-4fd2-8759-1cc06bb325cd'
 SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'http://headers.scrapeops.io/v1/user-agents?'
 SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
-SCRAPEOPS_NUM_RESULTS = 50
+SCRAPEOPS_NUM_RESULTS = 5
 
+
+
+
+## Insert Your List of Proxies Here
+ROTATING_PROXY_LIST = [
+    '5.252.179.222:32109',
+    '168.228.51.197:41037',
+    '106.242.5.206:4145',
+]
+
+# if we have all our proxies in a file we can simply do this 
+# ROTATING_PROXY_LIST_PATH = '/my/path/proxies.txt'
+
+
+## Enable The Proxy Middleware In Your Downloader Middlewares
 DOWNLOADER_MIDDLEWARES = {
     'bookscraper.middlewares.ScrapeOpsFakeUserAgentMiddleware': 400,
+    'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
 }
+
+#SINGLE ENDPOINT PROXY
+#When using a single proxy endpoint, you shouldn't use a rotating proxy middleware like the scrapy-rotating-proxies 
+# middleware as it could interfere with the correct functioning of the proxy.

@@ -1,8 +1,7 @@
 import scrapy
-#https://thepythonscrapyplaybook.com/freecodecamp-beginner-course/freecodecamp-scrapy-beginners-course-part-4-first-scraper/#creating-our-scrapy-spider
-from bookscraper.items import BookItem
+#https://thepythonscrapyplaybook.com/freecodecamp-beginner-course/freecodecamp-scrapy-beginners-course-part-9-rotating-proxies/#how-to-use-rotatingbackconnect-proxiesfrom bookscraper.items import BookItem
 #import random
-
+from items import BookItem
 
 
 class BookspiderSpider(scrapy.Spider):
